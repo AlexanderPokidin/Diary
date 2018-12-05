@@ -1,4 +1,4 @@
-package com.pokidin.a.diary.Views;
+package com.pokidin.a.diary.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
