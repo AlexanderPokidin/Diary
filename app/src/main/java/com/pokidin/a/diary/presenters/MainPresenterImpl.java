@@ -1,15 +1,13 @@
 package com.pokidin.a.diary.presenters;
 
-import android.content.Intent;
+import android.view.View;
 
-import com.pokidin.a.diary.LoginActivity;
-import com.pokidin.a.diary.views.MainActivity;
 import com.pokidin.a.diary.contracts.MainContract;
 
 public class MainPresenterImpl implements MainContract.MainPresenter {
-    private MainActivity mView;
+    private MainContract.MainView mView;
 
-    public MainPresenterImpl(MainActivity view) {
+    public MainPresenterImpl(MainContract.MainView view) {
         mView = view;
 
         initPresenter();
@@ -20,14 +18,13 @@ public class MainPresenterImpl implements MainContract.MainPresenter {
     }
 
     @Override
-    public void openLoginView() {
-        Intent intent = new Intent(mView, LoginActivity.class);
-        mView.startActivity(intent);
+    public void loginBtnClicked(View view) {
+        mView.openRegisterView();
         mView.showToast("Login view opened");
     }
 
     @Override
-    public void openRegisterView() {
+    public void registerBtnClicked(View view) {
         mView.showToast("Register view opened");
     }
 
