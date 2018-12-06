@@ -1,21 +1,25 @@
 package com.pokidin.a.diary.presenters;
 
+import android.content.ContentValues;
+import android.util.Patterns;
+
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.LoginContract;
+
+import java.util.List;
 
 public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     private LoginContract.LoginView mView;
     private LoginContract.LoginModel mModel;
     private UserData mUserData;
 
-    public LoginPresenterImpl(LoginContract.LoginView view, LoginContract.LoginModel model) {
+    public LoginPresenterImpl(LoginContract.LoginView view) {
         mView = view;
-        mModel = model;
     }
 
     @Override
     public void signInBtnClicked() {
-        mView.showToast("Sign In button is pressed");
+//        mView.showToast("Sign In button is pressed");
         mUserData = mView.getUserData();
         if (checkUserData(mUserData)) {
             loginUser();
@@ -27,7 +31,7 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         if (userData.getEmail().isEmpty()) {
             mView.showToast("Email field cannot be empty");
             return false;
-        } else if (!userData.getEmail().contains("@")) {
+        } else if (!isValidEmail(userData.getEmail())) {
             mView.showToast("Email is incorrect");
             return false;
         } else if (userData.getPassword().isEmpty()) {
@@ -41,6 +45,10 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         }
     }
 
+    private boolean isValidEmail(CharSequence target) {
+        return Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
     @Override
     public void registerUser() {
 
@@ -48,12 +56,26 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
     @Override
     public void loadUsers() {
-
+        mModel.loadUsers(new LoginContract.LoginModel.LoadUserCallback() {
+            @Override
+            public void onLoad(List<UserData> users) {
+                mView.showUsers(users);
+            }
+        });
     }
 
     @Override
     public void loginUser() {
-// TODO: Send Model to check the User
+        UserData userData = mView.getUserData();
+        ContentValues values = new ContentValues();
+        values.put("EMAIL", userData.getEmail());
+        values.put("PASS", userData.getPassword());
+        mModel.registerUser(values, new LoginContract.LoginModel.CompleteCallback() {
+            @Override
+            public void onComplete() {
+                loadUsers();
+            }
+        });
     }
 
     @Override

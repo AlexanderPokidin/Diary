@@ -11,10 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
+import com.pokidin.a.diary.common.UserAdapter;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.models.LoginModelImpl;
 import com.pokidin.a.diary.presenters.LoginPresenterImpl;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -24,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     private View mProgressView;
     private View mLoginFormView;
     private LoginContract.LoginPresenter mPresenter;
+    private UserAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,33 +40,16 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     @Override
     public void initView() {
         mEmailView = findViewById(R.id.email);
-
         mPasswordView = findViewById(R.id.password);
-
-
-//        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-//                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-//                    attemptLogin();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
-
-        mPresenter = new LoginPresenterImpl(this, new LoginModelImpl());
+        mPresenter = new LoginPresenterImpl(this);
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Sign In button is pressed");
                 mPresenter.signInBtnClicked();
-//                attemptLogin();
             }
         });
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -76,8 +63,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     }
 
     @Override
-    public void showUsers() {
-
+    public void showUsers(List<UserData> users) {
+        mAdapter.setData(users);
     }
 
     @Override
