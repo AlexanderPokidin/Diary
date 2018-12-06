@@ -9,18 +9,14 @@ public class MainPresenterImpl implements MainContract.MainPresenter {
 
     public MainPresenterImpl(MainContract.MainView view) {
         mView = view;
-
-        initPresenter();
-    }
-
-    private void initPresenter() {
-        mView.initView();
     }
 
     @Override
     public void loginBtnClicked(View view) {
-        mView.openRegisterView();
-        mView.showToast("Login view opened");
+        if (mView != null) {
+            mView.openRegisterView();
+            mView.showToast("Login view opened");
+        }
     }
 
     @Override
@@ -28,5 +24,8 @@ public class MainPresenterImpl implements MainContract.MainPresenter {
         mView.showToast("Register view opened");
     }
 
-
+    @Override
+    public void onDestroy() {
+        mView = null;
+    }
 }

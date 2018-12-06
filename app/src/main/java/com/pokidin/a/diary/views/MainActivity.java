@@ -12,7 +12,6 @@ import com.pokidin.a.diary.contracts.MainContract;
 import com.pokidin.a.diary.presenters.MainPresenterImpl;
 
 public class MainActivity extends AppCompatActivity implements MainContract.MainView {
-    private final static String TAG = MainActivity.class.getSimpleName();
 
     private MainContract.MainPresenter mPresenter;
 
@@ -21,12 +20,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPresenter = new MainPresenterImpl(this);
+        initView();
     }
 
     @Override
     public void initView() {
         Button btnLogin = findViewById(R.id.btnLogin);
+        mPresenter = new MainPresenterImpl(this);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,5 +53,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     public void openRegisterView() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
     }
 }

@@ -4,13 +4,11 @@ import android.view.View;
 
 public interface MainContract {
 
-    interface MainModel {
-
-    }
-
     interface MainView {
         void initView();
+
         void showToast(String message);
+
         void openRegisterView();
     }
 
@@ -18,5 +16,7 @@ public interface MainContract {
         void loginBtnClicked(View view);
 
         void registerBtnClicked(View view);
+
+        void onDestroy();
     }
 }
