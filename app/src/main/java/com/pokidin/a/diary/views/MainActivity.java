@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.loginBtnClicked(v);
+                mPresenter.loginBtnClicked();
             }
         });
 

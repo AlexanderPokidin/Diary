@@ -13,7 +13,7 @@ public interface MainContract {
     }
 
     interface MainPresenter {
-        void loginBtnClicked(View view);
+        void loginBtnClicked();
 
         void registerBtnClicked(View view);
 

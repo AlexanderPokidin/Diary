@@ -12,7 +12,7 @@ public class MainPresenterImpl implements MainContract.MainPresenter {
     }
 
     @Override
-    public void loginBtnClicked(View view) {
+    public void loginBtnClicked() {
         if (mView != null) {
             mView.openRegisterView();
             mView.showToast("Login view opened");
