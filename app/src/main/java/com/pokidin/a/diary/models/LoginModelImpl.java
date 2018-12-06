@@ -7,9 +7,9 @@ public class LoginModelImpl implements LoginContract.LoginModel {
 
     private DbHelper mDbHelper;
 
-    public LoginModelImpl(DbHelper dbHelper) {
-        mDbHelper = dbHelper;
-    }
+//    public LoginModelImpl(DbHelper dbHelper) {
+//        mDbHelper = dbHelper;
+//    }
 
 
     @Override
