@@ -10,6 +10,8 @@ public interface MainContract {
         void showToast(String message);
 
         void openRegisterView();
+
+        void openLoginView();
     }
 
     interface MainPresenter {

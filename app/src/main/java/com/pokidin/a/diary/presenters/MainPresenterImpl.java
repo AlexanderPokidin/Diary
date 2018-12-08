@@ -14,14 +14,17 @@ public class MainPresenterImpl implements MainContract.MainPresenter {
     @Override
     public void loginBtnClicked() {
         if (mView != null) {
-            mView.openRegisterView();
+            mView.openLoginView();
             mView.showToast("Login view opened");
         }
     }
 
     @Override
     public void registerBtnClicked(View view) {
-        mView.showToast("Register view opened");
+        if (mView != null) {
+            mView.openRegisterView();
+            mView.showToast("Register view opened");
+        }
     }
 
     @Override

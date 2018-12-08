@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 
     @Override
     public void initView() {
-        Button btnLogin = findViewById(R.id.btnLogin);
         mPresenter = new MainPresenterImpl(this);
+
+        Button btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 
     @Override
     public void openRegisterView() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openLoginView() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
