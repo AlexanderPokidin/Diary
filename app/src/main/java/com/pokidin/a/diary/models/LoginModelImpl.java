@@ -22,7 +22,7 @@ public class LoginModelImpl implements LoginContract.LoginModel {
     }
 
     @Override
-    public void checkUser() {
+    public void loginUser() {
 
     }
 

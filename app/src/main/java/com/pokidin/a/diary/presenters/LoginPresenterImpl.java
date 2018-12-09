@@ -21,13 +21,17 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     public void signInBtnClicked() {
 //        mView.showToast("Sign In button is pressed");
         mUserData = mView.getUserData();
-        if (checkUserData(mUserData)) {
+        if (checkLoginData(mUserData)) {
             loginUser();
         }
     }
 
+    @Override
+    public void registerBtnClicked() {
+
+    }
     // Validation of the specified data
-    private boolean checkUserData(UserData userData) {
+    private boolean checkLoginData(UserData userData) {
         if (userData.getEmail().isEmpty()) {
             mView.showToast("Email field cannot be empty");
             return false;
@@ -45,14 +49,28 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         }
     }
 
+    private boolean checkRegisterData(UserData userData) {
+        if (!checkLoginData(userData)){
+            return false;
+        } else if (userData.getName().isEmpty()){
+            mView.showToast("Name field cannot be empty");
+            return false;
+        } else if (userData.getSurname().isEmpty()){
+            mView.showToast("Surname field cannot be empty");
+            return false;
+        } else if (!userData.getPassword().equals(userData.getPasswordConfirm())){
+            mView.showToast("The entered passwords are different.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private boolean isValidEmail(CharSequence target) {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    @Override
-    public void registerUser() {
 
-    }
 
     @Override
     public void loadUsers() {

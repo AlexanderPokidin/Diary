@@ -4,6 +4,7 @@ public class UserData {
 
     private String email;
     private String password;
+    private String passwordConfirm;
     private String name;
     private String surname;
 
@@ -24,6 +25,14 @@ public class UserData {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public String getName() {
