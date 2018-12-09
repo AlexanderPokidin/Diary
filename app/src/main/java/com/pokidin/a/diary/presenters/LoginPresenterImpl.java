@@ -30,6 +30,7 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     public void registerBtnClicked() {
 
     }
+
     // Validation of the specified data
     private boolean checkLoginData(UserData userData) {
         if (userData.getEmail().isEmpty()) {
@@ -50,15 +51,15 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     }
 
     private boolean checkRegisterData(UserData userData) {
-        if (!checkLoginData(userData)){
+        if (!checkLoginData(userData)) {
             return false;
-        } else if (userData.getName().isEmpty()){
+        } else if (userData.getName().isEmpty()) {
             mView.showToast("Name field cannot be empty");
             return false;
-        } else if (userData.getSurname().isEmpty()){
+        } else if (userData.getSurname().isEmpty()) {
             mView.showToast("Surname field cannot be empty");
             return false;
-        } else if (!userData.getPassword().equals(userData.getPasswordConfirm())){
+        } else if (!userData.getPassword().equals(userData.getPasswordConfirm())) {
             mView.showToast("The entered passwords are different.");
             return false;
         } else {
@@ -69,7 +70,6 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     private boolean isValidEmail(CharSequence target) {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
-
 
 
     @Override
@@ -84,10 +84,10 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
     @Override
     public void loginUser() {
-        UserData userData = mView.getUserData();
+//        UserData userData = mView.getUserData();
         ContentValues values = new ContentValues();
-        values.put("EMAIL", userData.getEmail());
-        values.put("PASS", userData.getPassword());
+        values.put("EMAIL", mUserData.getEmail());
+        values.put("PASS", mUserData.getPassword());
         mModel.registerUser(values, new LoginContract.LoginModel.CompleteCallback() {
             @Override
             public void onComplete() {

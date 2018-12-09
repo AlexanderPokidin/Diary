@@ -14,7 +14,6 @@ import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserAdapter;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.LoginContract;
-import com.pokidin.a.diary.models.LoginModelImpl;
 import com.pokidin.a.diary.presenters.LoginPresenterImpl;
 
 import java.util.List;
