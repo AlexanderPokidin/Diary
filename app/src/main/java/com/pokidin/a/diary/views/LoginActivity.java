@@ -80,4 +80,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     public void hideProgress() {
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
+    }
 }

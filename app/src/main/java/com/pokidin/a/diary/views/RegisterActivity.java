@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.RegisterContract;
-import com.pokidin.a.diary.presenters.LoginPresenterImpl;
 import com.pokidin.a.diary.presenters.RegisterPresenterImpl;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.RegisterView {
@@ -30,6 +30,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        initView();
     }
 
     @Override
@@ -54,12 +56,18 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     @Override
     public UserData getUserData() {
-        return null;
+        UserData userData = new UserData();
+        userData.setEmail(mEmailView.getText().toString());
+        userData.setPassword(mPasswordView.getText().toString());
+        userData.setPasswordConfirm(mPasswordConfirmView.getText().toString());
+        userData.setName(mName.getText().toString());
+        userData.setSurname(mSurname.getText().toString());
+        return userData;
     }
 
     @Override
     public void showToast(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -70,5 +78,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     @Override
     public void hideProgress() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
     }
 }

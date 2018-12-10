@@ -1,6 +1,7 @@
 package com.pokidin.a.diary.presenters;
 
 import android.content.ContentValues;
+import android.util.Log;
 import android.util.Patterns;
 
 import com.pokidin.a.diary.common.UserData;
@@ -9,6 +10,8 @@ import com.pokidin.a.diary.contracts.LoginContract;
 import java.util.List;
 
 public class LoginPresenterImpl implements LoginContract.LoginPresenter {
+    private static final String TAG = LoginPresenterImpl.class.getSimpleName();
+
     private LoginContract.LoginView mView;
     private LoginContract.LoginModel mModel;
     private UserData mUserData;
@@ -24,11 +27,6 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         if (checkLoginData(mUserData)) {
             loginUser();
         }
-    }
-
-    @Override
-    public void registerBtnClicked() {
-
     }
 
     // Validation of the specified data
@@ -50,27 +48,9 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         }
     }
 
-    private boolean checkRegisterData(UserData userData) {
-        if (!checkLoginData(userData)) {
-            return false;
-        } else if (userData.getName().isEmpty()) {
-            mView.showToast("Name field cannot be empty");
-            return false;
-        } else if (userData.getSurname().isEmpty()) {
-            mView.showToast("Surname field cannot be empty");
-            return false;
-        } else if (!userData.getPassword().equals(userData.getPasswordConfirm())) {
-            mView.showToast("The entered passwords are different.");
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     private boolean isValidEmail(CharSequence target) {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
-
 
     @Override
     public void loadUsers() {
@@ -84,7 +64,9 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
     @Override
     public void loginUser() {
-//        UserData userData = mView.getUserData();
+        Log.d(TAG, "Login started successfully");
+        mView.showToast("Login started successfully");
+
         ContentValues values = new ContentValues();
         values.put("EMAIL", mUserData.getEmail());
         values.put("PASS", mUserData.getPassword());

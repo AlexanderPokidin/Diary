@@ -41,8 +41,6 @@ public interface LoginContract {
     interface LoginPresenter {
         void signInBtnClicked();
 
-        void registerBtnClicked();
-
         void loadUsers();
 
         void loginUser();
