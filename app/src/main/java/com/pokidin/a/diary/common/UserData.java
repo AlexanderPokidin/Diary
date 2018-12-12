@@ -8,7 +8,11 @@ public class UserData {
     private String name;
     private String surname;
 
-    public UserData() {
+    public static UserData getInstance() {
+        return new UserData();
+    }
+
+    private UserData() {
     }
 
     public String getEmail() {

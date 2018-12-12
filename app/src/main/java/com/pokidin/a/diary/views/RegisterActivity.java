@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     @Override
     public UserData getUserData() {
-        UserData userData = new UserData();
+        UserData userData = UserData.getInstance();
         userData.setEmail(mEmailView.getText().toString());
         userData.setPassword(mPasswordView.getText().toString());
         userData.setPasswordConfirm(mPasswordConfirmView.getText().toString());

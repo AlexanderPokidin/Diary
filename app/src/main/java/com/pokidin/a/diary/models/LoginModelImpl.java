@@ -3,19 +3,35 @@ package com.pokidin.a.diary.models;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.pokidin.a.diary.common.UserData;
+import com.pokidin.a.diary.common.UserLogin;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.database.DbHelper;
 import com.pokidin.a.diary.database.UserTable;
+import com.pokidin.a.diary.web.DiaryAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginModelImpl implements LoginContract.LoginModel {
+    private static final String TAG = LoginModelImpl.class.getSimpleName();
+    private static final String BASE_URL = "https://my-diary-node-api.herokuapp.com";
 
     private DbHelper mDbHelper;
+    private UserData mUserData;
+
+    public LoginModelImpl() {
+    }
 
     public LoginModelImpl(DbHelper dbHelper) {
         mDbHelper = dbHelper;
@@ -23,9 +39,40 @@ public class LoginModelImpl implements LoginContract.LoginModel {
 
     @Override
     public void loginUser() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        DiaryAPI diaryAPI = retrofit.create(DiaryAPI.class);
+
+        mUserData = UserData.getInstance();
+        UserLogin userLogin = new UserLogin(mUserData.getEmail(), mUserData.getPassword());
+        Call<ResponseBody> call = diaryAPI.loginUser(userLogin);
+        call.enqueue(new Callback<ResponseBody>() {
+                         @Override
+                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                             if (response.isSuccessful()) {
+                                 Log.d(TAG, "Response is Successful, " + response.code() + ", " + response.message() + ", "
+                                         + (response.errorBody() != null ? response.errorBody().toString() : "Error is " + null)
+                                         + ", " + (response.body() != null ? response.body().toString() : "Response is " + null));
+                             } else {
+                                 Log.d(TAG, "Response is Failed, " + response.code() + ", " + response.message() + ", "
+                                         + (response.errorBody() != null ? response.errorBody().source().toString() : "Error is " + null)
+                                         + ", " + (response.body() != null ? response.body().toString() : "Response is " + null));
+                             }
+                         }
+
+                         @Override
+                         public void onFailure(Call<ResponseBody> call, Throwable t) {
+                             Log.d(TAG, t.getMessage());
+                         }
+                     }
+        );
 
     }
 
+    //    __________________________ OLD METHODS _________________________
     @Override
     public void registerUser(ContentValues values, CompleteCallback callback) {
         AddUserTask addUserTask = new AddUserTask(callback);
@@ -84,7 +131,7 @@ public class LoginModelImpl implements LoginContract.LoginModel {
                     new String[]{email},
                     null, null, null);
             while (cursor.moveToNext()) {
-                UserData user = new UserData();
+                UserData user = UserData.getInstance();
                 user.setEmail(cursor.getString(1));
                 user.setPassword(cursor.getString(2));
                 users.add(user);

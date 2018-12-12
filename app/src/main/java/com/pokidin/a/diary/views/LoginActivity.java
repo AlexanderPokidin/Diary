@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
     @Override
     public UserData getUserData() {
-        UserData userData = new UserData();
+        UserData userData = UserData.getInstance();
         userData.setEmail(mEmailView.getText().toString());
         userData.setPassword(mPasswordView.getText().toString());
         return userData;

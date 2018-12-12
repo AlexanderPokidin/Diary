@@ -59,9 +59,9 @@ public class RegisterPresenterImpl implements RegisterContract.RegisterPresenter
             Log.d(TAG, "Password field cannot be empty");
             mView.showToast("Password field cannot be empty");
             return false;
-        } else if (userData.getPassword().length() < 6) {
-            Log.d(TAG, "Password cannot be shorter than 6 symbols");
-            mView.showToast("Password cannot be shorter than 6 symbols");
+        } else if (userData.getPassword().length() < 5) {
+            Log.d(TAG, "Password cannot be shorter than 5 symbols");
+            mView.showToast("Password cannot be shorter than 5 symbols");
             return false;
         } else if (userData.getPasswordConfirm().isEmpty()) {
             Log.d(TAG, "PasswordConfirm field cannot be empty");

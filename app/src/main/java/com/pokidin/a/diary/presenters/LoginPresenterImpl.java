@@ -6,6 +6,7 @@ import android.util.Patterns;
 
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.LoginContract;
+import com.pokidin.a.diary.models.LoginModelImpl;
 
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         } else if (userData.getPassword().isEmpty()) {
             mView.showToast("Password field cannot be empty");
             return false;
-        } else if (userData.getPassword().length() < 6) {
-            mView.showToast("Password field cannot be shorter than 6 symbols");
+        } else if (userData.getPassword().length() < 5) {
+            mView.showToast("Password field cannot be shorter than 5 symbols");
             return false;
         } else {
             return true;
@@ -64,18 +65,25 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
     @Override
     public void loginUser() {
+        mModel = new LoginModelImpl();
         Log.d(TAG, "Login started successfully");
         mView.showToast("Login started successfully");
 
-        ContentValues values = new ContentValues();
-        values.put("EMAIL", mUserData.getEmail());
-        values.put("PASS", mUserData.getPassword());
-        mModel.registerUser(values, new LoginContract.LoginModel.CompleteCallback() {
-            @Override
-            public void onComplete() {
-                loadUsers();
-            }
-        });
+        if (mModel != null) {
+            mModel.loginUser();
+        } else {
+            Log.d(TAG, "Model is NULL");
+        }
+
+//        ContentValues values = new ContentValues();
+//        values.put("EMAIL", mUserData.getEmail());
+//        values.put("PASS", mUserData.getPassword());
+//        mModel.registerUser(values, new LoginContract.LoginModel.CompleteCallback() {
+//            @Override
+//            public void onComplete() {
+//                loadUsers();
+//            }
+//        });
     }
 
     @Override
