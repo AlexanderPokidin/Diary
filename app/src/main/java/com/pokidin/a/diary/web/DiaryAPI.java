@@ -9,8 +9,8 @@ import retrofit2.http.POST;
 
 public interface DiaryAPI {
 
-    @POST("/login/")
+    @POST("/login")
     Call<ResponseBody> loginUser(
             @Body UserLogin userLogin
-            );
+    );
 }

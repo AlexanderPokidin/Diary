@@ -1,6 +1,5 @@
 package com.pokidin.a.diary.presenters;
 
-import android.content.ContentValues;
 import android.util.Log;
 import android.util.Patterns;
 
@@ -70,7 +69,7 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         mView.showToast("Login started successfully");
 
         if (mModel != null) {
-            mModel.loginUser();
+            mModel.sendLoginUserData(mUserData);
         } else {
             Log.d(TAG, "Model is NULL");
         }

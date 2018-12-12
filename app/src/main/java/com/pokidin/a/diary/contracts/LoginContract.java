@@ -9,7 +9,7 @@ import java.util.List;
 public interface LoginContract {
 
     interface LoginModel {
-        void loginUser();
+        void sendLoginUserData(UserData userData);
 
         void registerUser(ContentValues values, CompleteCallback callback);
 

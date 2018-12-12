@@ -1,8 +1,15 @@
 package com.pokidin.a.diary.common;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class UserData {
 
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("password")
+    @Expose
     private String password;
     private String passwordConfirm;
     private String name;

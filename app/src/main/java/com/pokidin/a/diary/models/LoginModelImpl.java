@@ -28,7 +28,6 @@ public class LoginModelImpl implements LoginContract.LoginModel {
     private static final String BASE_URL = "https://my-diary-node-api.herokuapp.com";
 
     private DbHelper mDbHelper;
-    private UserData mUserData;
 
     public LoginModelImpl() {
     }
@@ -38,7 +37,7 @@ public class LoginModelImpl implements LoginContract.LoginModel {
     }
 
     @Override
-    public void loginUser() {
+    public void sendLoginUserData(UserData userData) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -46,16 +45,14 @@ public class LoginModelImpl implements LoginContract.LoginModel {
 
         DiaryAPI diaryAPI = retrofit.create(DiaryAPI.class);
 
-        mUserData = UserData.getInstance();
-        UserLogin userLogin = new UserLogin(mUserData.getEmail(), mUserData.getPassword());
+        UserLogin userLogin = new UserLogin(userData.getEmail(), userData.getPassword());
         Call<ResponseBody> call = diaryAPI.loginUser(userLogin);
         call.enqueue(new Callback<ResponseBody>() {
                          @Override
                          public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                              if (response.isSuccessful()) {
                                  Log.d(TAG, "Response is Successful, " + response.code() + ", " + response.message() + ", "
-                                         + (response.errorBody() != null ? response.errorBody().toString() : "Error is " + null)
-                                         + ", " + (response.body() != null ? response.body().toString() : "Response is " + null));
+                                         + ", " + (response.body() != null ? response.body().source().toString() : "Response is " + null));
                              } else {
                                  Log.d(TAG, "Response is Failed, " + response.code() + ", " + response.message() + ", "
                                          + (response.errorBody() != null ? response.errorBody().source().toString() : "Error is " + null)
