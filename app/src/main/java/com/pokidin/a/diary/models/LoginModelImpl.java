@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.common.UserLogin;
+import com.pokidin.a.diary.common.UserLoginResponse;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.database.DbHelper;
 import com.pokidin.a.diary.database.UserTable;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +28,7 @@ public class LoginModelImpl implements LoginContract.LoginModel {
     private static final String BASE_URL = "https://my-diary-node-api.herokuapp.com";
 
     private DbHelper mDbHelper;
+    private UserLoginResponse mLoginResponse;
 
     public LoginModelImpl() {
     }
@@ -46,27 +47,27 @@ public class LoginModelImpl implements LoginContract.LoginModel {
         DiaryAPI diaryAPI = retrofit.create(DiaryAPI.class);
 
         UserLogin userLogin = new UserLogin(userData.getEmail(), userData.getPassword());
-        Call<ResponseBody> call = diaryAPI.loginUser(userLogin);
-        call.enqueue(new Callback<ResponseBody>() {
-                         @Override
-                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                             if (response.isSuccessful()) {
-                                 Log.d(TAG, "Response is Successful, " + response.code() + ", " + response.message() + ", "
-                                         + ", " + (response.body() != null ? response.body().source().toString() : "Response is " + null));
-                             } else {
-                                 Log.d(TAG, "Response is Failed, " + response.code() + ", " + response.message() + ", "
-                                         + (response.errorBody() != null ? response.errorBody().source().toString() : "Error is " + null)
-                                         + ", " + (response.body() != null ? response.body().toString() : "Response is " + null));
-                             }
-                         }
+        Call<UserLoginResponse> call = diaryAPI.loginUser(userLogin);
 
-                         @Override
-                         public void onFailure(Call<ResponseBody> call, Throwable t) {
-                             Log.d(TAG, t.getMessage());
-                         }
-                     }
-        );
+        call.enqueue(new Callback<UserLoginResponse>() {
+            @Override
+            public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Response is Successful, " + response.code() + ", " + response.message());
+                    mLoginResponse = response.body();
+                    assert mLoginResponse != null;
+                    Log.d(TAG, "mLoginResponse: " + mLoginResponse.getUserName() + ", Token: " + mLoginResponse.getToken());
 
+                } else {
+                    Log.d(TAG, "Response is Failed, " + response.code() + ", " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserLoginResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     //    __________________________ OLD METHODS _________________________
