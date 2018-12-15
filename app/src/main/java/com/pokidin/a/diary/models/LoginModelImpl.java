@@ -9,8 +9,8 @@ import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.common.UserLogin;
 import com.pokidin.a.diary.common.UserLoginResponse;
 import com.pokidin.a.diary.contracts.LoginContract;
-import com.pokidin.a.diary.database.DbHelper;
-import com.pokidin.a.diary.database.UserTable;
+import com.pokidin.a.diary.storage.DbHelper;
+import com.pokidin.a.diary.storage.UserTable;
 import com.pokidin.a.diary.web.DiaryAPI;
 
 import java.util.ArrayList;

@@ -1,11 +1,15 @@
 package com.pokidin.a.diary.presenters;
 
+import android.app.Application;
 import android.util.Log;
 import android.util.Patterns;
 
+import com.pokidin.a.diary.common.App;
 import com.pokidin.a.diary.common.UserData;
+import com.pokidin.a.diary.common.UserLoginResponse;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.models.LoginModelImpl;
+import com.pokidin.a.diary.storage.Preferences;
 
 import java.util.List;
 
@@ -70,6 +74,9 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
         if (mModel != null) {
             mModel.sendLoginUserData(mUserData);
+            UserLoginResponse userLoginResponse = new UserLoginResponse();
+            Preferences preferences = new Preferences(App.getAppContext());
+            preferences.setToken(userLoginResponse.getToken());
         } else {
             Log.d(TAG, "Model is NULL");
         }

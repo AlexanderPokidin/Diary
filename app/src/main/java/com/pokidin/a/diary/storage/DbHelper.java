@@ -1,4 +1,4 @@
-package com.pokidin.a.diary.database;
+package com.pokidin.a.diary.storage;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

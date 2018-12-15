@@ -1,4 +1,4 @@
-package com.pokidin.a.diary.database;
+package com.pokidin.a.diary.storage;
 
 /* The UserTable class contains fields for creating the database. */
 
