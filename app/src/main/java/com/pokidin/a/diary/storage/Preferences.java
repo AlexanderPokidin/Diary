@@ -3,9 +3,11 @@ package com.pokidin.a.diary.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+// A class that encapsulates work with SharedPreferences
+
 public class Preferences {
-    final static String PREF_NAME = "preferences";
-    final static String TOKEN = "token";
+    private final static String PREF_NAME = "preferences";
+    private final static String TOKEN = "token";
 
     private SharedPreferences mSharedPreferences;
 

@@ -3,6 +3,8 @@ package com.pokidin.a.diary.common;
 import android.app.Application;
 import android.content.Context;
 
+// Helper class to access the application context
+
 public class App extends Application {
     private static Context sContext;
 
