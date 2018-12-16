@@ -22,7 +22,7 @@
         <activity
             android:name=".views.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".views.RegisterActivity"></activity>
+        <activity android:name=".views.CheckInActivity"></activity>
     </application>
 
 </manifest>

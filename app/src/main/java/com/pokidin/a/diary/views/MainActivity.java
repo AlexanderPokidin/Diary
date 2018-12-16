@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
 
     @Override
     public void openRegisterView() {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, CheckInActivity.class);
         startActivity(intent);
     }
 

@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
-import com.pokidin.a.diary.contracts.RegisterContract;
-import com.pokidin.a.diary.presenters.RegisterPresenterImpl;
+import com.pokidin.a.diary.contracts.CheckInContract;
+import com.pokidin.a.diary.presenters.CheckInPresenterImpl;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterContract.RegisterView {
+public class CheckInActivity extends AppCompatActivity implements CheckInContract.CheckInView {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private AutoCompleteTextView mName;
@@ -24,12 +24,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     private EditText mPasswordConfirmView;
     private View mProgressView;
     private View mLoginFormView;
-    private RegisterContract.RegisterPresenter mPresenter;
+    private CheckInContract.CheckInPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_check_in);
 
         initView();
     }
@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         mPasswordView = findViewById(R.id.password);
         mPasswordConfirmView = findViewById(R.id.password_confirm);
         Button mEmailRegisterButton = findViewById(R.id.email_register_button);
-        mPresenter = new RegisterPresenterImpl(this);
+        mPresenter = new CheckInPresenterImpl(this);
         mEmailRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

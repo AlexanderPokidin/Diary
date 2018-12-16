@@ -11,10 +11,6 @@ public class Preferences {
 
     private SharedPreferences mSharedPreferences;
 
-    public Preferences(SharedPreferences sharedPreferences) {
-            mSharedPreferences = sharedPreferences;
-    }
-
     public Preferences(Context context) {
         mSharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }

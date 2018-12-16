@@ -2,13 +2,13 @@ package com.pokidin.a.diary.contracts;
 
 import com.pokidin.a.diary.common.UserData;
 
-public interface RegisterContract {
+public interface CheckInContract {
 
-    interface RegisterModel {
+    interface CheckInModel {
 
     }
 
-    interface RegisterView {
+    interface CheckInView {
         void initView();
 
         UserData getUserData();
@@ -20,7 +20,7 @@ public interface RegisterContract {
         void hideProgress();
     }
 
-    interface RegisterPresenter {
+    interface CheckInPresenter {
 
         void registerBtnClicked();
 

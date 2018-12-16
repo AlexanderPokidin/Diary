@@ -4,16 +4,16 @@ import android.util.Log;
 import android.util.Patterns;
 
 import com.pokidin.a.diary.common.UserData;
-import com.pokidin.a.diary.contracts.RegisterContract;
+import com.pokidin.a.diary.contracts.CheckInContract;
 
-public class RegisterPresenterImpl implements RegisterContract.RegisterPresenter {
-    private static final String TAG = RegisterPresenterImpl.class.getSimpleName();
+public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
+    private static final String TAG = CheckInPresenterImpl.class.getSimpleName();
 
-    private RegisterContract.RegisterView mView;
-    private RegisterContract.RegisterModel mModel;
+    private CheckInContract.CheckInView mView;
+    private CheckInContract.CheckInModel mModel;
     private UserData mUserData;
 
-    public RegisterPresenterImpl(RegisterContract.RegisterView view) {
+    public CheckInPresenterImpl(CheckInContract.CheckInView view) {
         mView = view;
     }
 
