@@ -12,7 +12,11 @@ public class UserData {
     @Expose
     private String password;
     private String passwordConfirm;
+    @SerializedName("firstName")
+    @Expose
     private String name;
+    @SerializedName("lastName")
+    @Expose
     private String surname;
 
     public static UserData getInstance() {

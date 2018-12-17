@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
-import com.pokidin.a.diary.common.UserAdapter;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.presenters.LoginPresenterImpl;
@@ -26,7 +25,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     private View mProgressView;
     private View mLoginFormView;
     private LoginContract.LoginPresenter mPresenter;
-    private UserAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,11 +57,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         userData.setEmail(mEmailView.getText().toString());
         userData.setPassword(mPasswordView.getText().toString());
         return userData;
-    }
-
-    @Override
-    public void showUsers(List<UserData> users) {
-        mAdapter.setData(users);
     }
 
     @Override

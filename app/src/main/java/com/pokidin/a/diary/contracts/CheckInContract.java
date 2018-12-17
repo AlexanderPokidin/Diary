@@ -5,6 +5,7 @@ import com.pokidin.a.diary.common.UserData;
 public interface CheckInContract {
 
     interface CheckInModel {
+        void sendCheckInUserData(UserData userData);
 
     }
 

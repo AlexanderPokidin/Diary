@@ -1,6 +1,5 @@
 package com.pokidin.a.diary.presenters;
 
-import android.app.Application;
 import android.util.Log;
 import android.util.Patterns;
 
@@ -10,8 +9,6 @@ import com.pokidin.a.diary.common.UserLoginResponse;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.models.LoginModelImpl;
 import com.pokidin.a.diary.storage.Preferences;
-
-import java.util.List;
 
 public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     private static final String TAG = LoginPresenterImpl.class.getSimpleName();
@@ -26,7 +23,6 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
     @Override
     public void signInBtnClicked() {
-//        mView.showToast("Sign In button is pressed");
         mUserData = mView.getUserData();
         if (checkLoginData(mUserData)) {
             loginUser();
@@ -57,16 +53,6 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     }
 
     @Override
-    public void loadUsers() {
-        mModel.loadUsers(new LoginContract.LoginModel.LoadUserCallback() {
-            @Override
-            public void onLoad(List<UserData> users) {
-                mView.showUsers(users);
-            }
-        });
-    }
-
-    @Override
     public void loginUser() {
         mModel = new LoginModelImpl();
         Log.d(TAG, "Login started successfully");
@@ -80,16 +66,6 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         } else {
             Log.d(TAG, "Model is NULL");
         }
-
-//        ContentValues values = new ContentValues();
-//        values.put("EMAIL", mUserData.getEmail());
-//        values.put("PASS", mUserData.getPassword());
-//        mModel.registerUser(values, new LoginContract.LoginModel.CompleteCallback() {
-//            @Override
-//            public void onComplete() {
-//                loadUsers();
-//            }
-//        });
     }
 
     @Override

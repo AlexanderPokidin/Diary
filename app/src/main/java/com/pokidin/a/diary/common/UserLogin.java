@@ -11,10 +11,23 @@ public class UserLogin {
     @SerializedName("password")
     @Expose
     private String password;
+    @SerializedName("firstName")
+    @Expose
+    private String name;
+    @SerializedName("lastName")
+    @Expose
+    private String surname;
 
     public UserLogin(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public UserLogin(String email, String password, String name, String surname) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
     }
 
     public String getEmail() {
