@@ -5,6 +5,7 @@ import android.util.Patterns;
 
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.CheckInContract;
+import com.pokidin.a.diary.models.CheckInModelImpl;
 
 public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
     private static final String TAG = CheckInPresenterImpl.class.getSimpleName();
@@ -27,8 +28,15 @@ public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
 
     @Override
     public void registerUser() {
+        mModel = new CheckInModelImpl();
         Log.d(TAG, "Registration started successfully");
         mView.showToast("Registration started successfully");
+
+        if (mModel != null) {
+            mModel.sendCheckInUserData(mUserData);
+        } else {
+            Log.d(TAG, "Model is NULL");
+        }
     }
 
     @Override

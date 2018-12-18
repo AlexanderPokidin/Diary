@@ -29,6 +29,22 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
         }
     }
 
+    @Override
+    public void loginUser() {
+        mModel = new LoginModelImpl();
+        Log.d(TAG, "Login started successfully");
+        mView.showToast("Login started successfully");
+
+        if (mModel != null) {
+            mModel.sendLoginUserData(mUserData);
+            UserLoginResponse userLoginResponse = new UserLoginResponse();
+            Preferences preferences = new Preferences(App.getAppContext());
+            preferences.setToken(userLoginResponse.getToken());
+        } else {
+            Log.d(TAG, "Model is NULL");
+        }
+    }
+
     // Validation of the specified data
     private boolean checkLoginData(UserData userData) {
         if (userData.getEmail().isEmpty()) {
@@ -50,22 +66,6 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
 
     private boolean isValidEmail(CharSequence target) {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches();
-    }
-
-    @Override
-    public void loginUser() {
-        mModel = new LoginModelImpl();
-        Log.d(TAG, "Login started successfully");
-        mView.showToast("Login started successfully");
-
-        if (mModel != null) {
-            mModel.sendLoginUserData(mUserData);
-            UserLoginResponse userLoginResponse = new UserLoginResponse();
-            Preferences preferences = new Preferences(App.getAppContext());
-            preferences.setToken(userLoginResponse.getToken());
-        } else {
-            Log.d(TAG, "Model is NULL");
-        }
     }
 
     @Override
