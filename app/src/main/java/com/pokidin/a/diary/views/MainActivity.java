@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
             }
         });
 
-        Button btnRegister = findViewById(R.id.btnRegister);
+        Button btnRegister = findViewById(R.id.btnCheckIn);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

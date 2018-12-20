@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Diary</string>
     <string name="login">LOGIN</string>
-    <string name="register">Register</string>
+    <string name="check_in">Check in</string>
     <string name="logo">LOGO</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->

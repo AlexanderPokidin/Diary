@@ -40,6 +40,8 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
             UserLoginResponse userLoginResponse = new UserLoginResponse();
             Preferences preferences = new Preferences(App.getAppContext());
             preferences.setToken(userLoginResponse.getToken());
+            Log.d(TAG, "loginUser: preferences.setToken");
+
         } else {
             Log.d(TAG, "Model is NULL");
         }

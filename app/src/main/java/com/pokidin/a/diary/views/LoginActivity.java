@@ -8,14 +8,13 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.presenters.LoginPresenterImpl;
-
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -66,12 +65,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
     @Override
     public void showProgress() {
-
+        mProgressView.setVisibility(View.VISIBLE);
+        mLoginFormView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        mProgressView.setVisibility(View.GONE);
+        mLoginFormView.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -111,12 +111,12 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/email_register_button"
+                android:id="@+id/email_check_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/register"
+                android:text="@string/check_in"
                 android:textStyle="bold" />
 
         </LinearLayout>

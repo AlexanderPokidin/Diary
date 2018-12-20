@@ -41,13 +41,13 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);
         mPasswordConfirmView = findViewById(R.id.password_confirm);
-        Button mEmailRegisterButton = findViewById(R.id.email_register_button);
+        Button mEmailRegisterButton = findViewById(R.id.email_check_in_button);
         mPresenter = new CheckInPresenterImpl(this);
         mEmailRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Register button is pressed");
-                mPresenter.registerBtnClicked();
+                mPresenter.checkInBtnClicked();
             }
         });
         mLoginFormView = findViewById(R.id.login_form);

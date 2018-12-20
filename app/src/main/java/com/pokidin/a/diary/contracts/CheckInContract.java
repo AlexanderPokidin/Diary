@@ -23,9 +23,9 @@ public interface CheckInContract {
 
     interface CheckInPresenter {
 
-        void registerBtnClicked();
+        void checkInBtnClicked();
 
-        void registerUser();
+        void checkInUser();
 
         void onDestroy();
     }

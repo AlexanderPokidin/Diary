@@ -19,15 +19,15 @@ public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
     }
 
     @Override
-    public void registerBtnClicked() {
+    public void checkInBtnClicked() {
         mUserData = mView.getUserData();
-        if (checkRegisterData(mUserData)) {
-            registerUser();
+        if (checkRegistrationData(mUserData)) {
+            checkInUser();
         }
     }
 
     @Override
-    public void registerUser() {
+    public void checkInUser() {
         mModel = new CheckInModelImpl();
         Log.d(TAG, "Registration started successfully");
         mView.showToast("Registration started successfully");
@@ -46,7 +46,7 @@ public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
     }
 
     // Validation of the specified data
-    private boolean checkRegisterData(UserData userData) {
+    private boolean checkRegistrationData(UserData userData) {
         if (userData.getName().isEmpty()) {
             Log.d(TAG, "Name field cannot be empty");
             mView.showToast("Name field cannot be empty");
