@@ -20,7 +20,7 @@ public class MainPresenterImpl implements MainContract.MainPresenter {
     }
 
     @Override
-    public void registerBtnClicked(View view) {
+    public void registerBtnClicked() {
         if (mView != null) {
             mView.openRegisterView();
             mView.showToast("Register view opened");

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.registerBtnClicked(v);
+                mPresenter.registerBtnClicked();
             }
         });
     }

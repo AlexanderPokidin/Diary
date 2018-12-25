@@ -1,7 +1,5 @@
 package com.pokidin.a.diary.contracts;
 
-import android.view.View;
-
 public interface MainContract {
 
     interface MainView {
@@ -17,7 +15,7 @@ public interface MainContract {
     interface MainPresenter {
         void loginBtnClicked();
 
-        void registerBtnClicked(View view);
+        void registerBtnClicked();
 
         void onDestroy();
     }
