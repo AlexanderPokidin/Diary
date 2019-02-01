@@ -5,11 +5,9 @@ import android.util.Patterns;
 
 import com.pokidin.a.diary.common.App;
 import com.pokidin.a.diary.common.UserData;
-import com.pokidin.a.diary.common.UserLoginResponse;
 import com.pokidin.a.diary.contracts.EntryContract;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.models.EntryModelImpl;
-import com.pokidin.a.diary.models.LoginModelImpl;
 import com.pokidin.a.diary.storage.Preferences;
 
 public class EntryPresenterImpl implements EntryContract.EntryPresenter, EntryContract.EntryModel.OnFinishedListener {
@@ -23,16 +21,16 @@ public class EntryPresenterImpl implements EntryContract.EntryPresenter, EntryCo
         mView = view;
     }
 
-    @Override
-    public void signInBtnClicked() {
+    @Override // NO
+    public void entryBtnClicked() {
         mUserData = mView.getUserData();
         if (checkEntryData(mUserData)) {
-            loginUser();
+            entryUser();
         }
     }
 
     @Override
-    public void loginUser() {
+    public void entryUser() {
         mModel = new EntryModelImpl();
         Log.d(TAG, "Login started successfully");
         mView.showToast("Login started successfully");
@@ -40,7 +38,7 @@ public class EntryPresenterImpl implements EntryContract.EntryPresenter, EntryCo
         if (mModel != null) {
             mModel.getAccess(mUserData, this);
 
-            Log.d(TAG, "loginUser: started");
+            Log.d(TAG, "entryUser: started");
 
         } else {
             Log.d(TAG, "Model is NULL");

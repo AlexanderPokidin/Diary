@@ -17,6 +17,9 @@ public class UserLogin {
     @SerializedName("password")
     @Expose
     private String password;
+    @SerializedName("passwordConfirmation")
+    @Expose
+    private String passwordConfirm;
 
 
     public UserLogin(String email, String password) {
@@ -24,11 +27,12 @@ public class UserLogin {
         this.password = password;
     }
 
-    public UserLogin(String name, String surname, String email, String password) {
+    public UserLogin(String name, String surname, String email, String password, String passwordConfirm) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.passwordConfirm = passwordConfirm;
     }
 
     public String getEmail() {

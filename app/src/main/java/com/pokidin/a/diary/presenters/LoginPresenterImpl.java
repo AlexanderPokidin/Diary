@@ -22,15 +22,15 @@ import com.pokidin.a.diary.storage.Preferences;
 //    }
 //
 //    @Override
-//    public void signInBtnClicked() {
+//    public void entryBtnClicked() {
 //        mUserData = mView.getUserData();
 //        if (checkLoginData(mUserData)) {
-//            loginUser();
+//            entryUser();
 //        }
 //    }
 //
 //    @Override
-//    public void loginUser() {
+//    public void entryUser() {
 //        mModel = new LoginModelImpl();
 //        Log.d(TAG, "Login started successfully");
 //        mView.showToast("Login started successfully");
@@ -40,7 +40,7 @@ import com.pokidin.a.diary.storage.Preferences;
 //            UserLoginResponse userLoginResponse = new UserLoginResponse();
 //            Preferences preferences = new Preferences(App.getAppContext());
 //            preferences.setToken(userLoginResponse.getToken());
-//            Log.d(TAG, "loginUser: preferences.setToken");
+//            Log.d(TAG, "entryUser: preferences.setToken");
 //
 //        } else {
 //            Log.d(TAG, "Model is NULL");

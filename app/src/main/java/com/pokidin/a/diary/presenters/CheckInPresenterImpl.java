@@ -3,15 +3,18 @@ package com.pokidin.a.diary.presenters;
 import android.util.Log;
 import android.util.Patterns;
 
+import com.pokidin.a.diary.common.App;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.CheckInContract;
+import com.pokidin.a.diary.contracts.EntryContract;
 import com.pokidin.a.diary.models.CheckInModelImpl;
+import com.pokidin.a.diary.storage.Preferences;
 
-public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
+public class CheckInPresenterImpl implements EntryContract.EntryPresenter, EntryContract.EntryModel.OnFinishedListener {
     private static final String TAG = CheckInPresenterImpl.class.getSimpleName();
 
     private CheckInContract.CheckInView mView;
-    private CheckInContract.CheckInModel mModel;
+    private EntryContract.EntryModel mModel;
     private UserData mUserData;
 
     public CheckInPresenterImpl(CheckInContract.CheckInView view) {
@@ -19,21 +22,21 @@ public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
     }
 
     @Override
-    public void checkInBtnClicked() {
+    public void entryBtnClicked() {
         mUserData = mView.getUserData();
         if (checkRegistrationData(mUserData)) {
-            checkInUser();
+            entryUser();
         }
     }
 
     @Override
-    public void checkInUser() {
+    public void entryUser() {
         mModel = new CheckInModelImpl();
         Log.d(TAG, "Registration started successfully");
         mView.showToast("Registration started successfully");
 
         if (mModel != null) {
-            mModel.sendCheckInUserData(mUserData);
+            mModel.getAccess(mUserData, this);
         } else {
             Log.d(TAG, "Model is NULL");
         }
@@ -84,7 +87,18 @@ public class CheckInPresenterImpl implements CheckInContract.CheckInPresenter {
         }
     }
 
-    private boolean isValidEmail(CharSequence target) {
+    private boolean isValidEmail(CharSequence target) { //YES
         return Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    @Override // YES
+    public void onFinished(String string) {
+        if (string != null) {
+            Preferences preferences = new Preferences(App.getAppContext());
+            preferences.setToken(string);
+            Log.d(TAG, "onFinished: Token is: " + string);
+        } else {
+            Log.d(TAG, "onFinished: Token string is empty");
+        }
     }
 }

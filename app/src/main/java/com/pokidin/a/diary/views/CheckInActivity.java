@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.CheckInContract;
+import com.pokidin.a.diary.contracts.EntryContract;
 import com.pokidin.a.diary.presenters.CheckInPresenterImpl;
 
 public class CheckInActivity extends AppCompatActivity implements CheckInContract.CheckInView {
@@ -24,7 +25,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
     private EditText mPasswordConfirmView;
     private View mProgressView;
     private View mLoginFormView;
-    private CheckInContract.CheckInPresenter mPresenter;
+    private EntryContract.EntryPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Register button is pressed");
-                mPresenter.checkInBtnClicked();
+                mPresenter.entryBtnClicked();
             }
         });
         mLoginFormView = findViewById(R.id.login_form);

@@ -24,9 +24,9 @@ public interface EntryContract {
     }
 
     interface EntryPresenter {
-        void signInBtnClicked();
+        void entryBtnClicked();
 
-        void loginUser();
+        void entryUser();
 
         void onDestroy();
     }

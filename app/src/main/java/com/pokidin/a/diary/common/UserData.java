@@ -11,6 +11,8 @@ public class UserData {
     @SerializedName("password")
     @Expose
     private String password;
+    @SerializedName("passwordConfirmation")
+    @Expose
     private String passwordConfirm;
     @SerializedName("firstName")
     @Expose

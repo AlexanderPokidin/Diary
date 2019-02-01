@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
@@ -44,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Sign In button is pressed");
-                mPresenter.signInBtnClicked();
+                mPresenter.entryBtnClicked();
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
