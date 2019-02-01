@@ -13,8 +13,9 @@ import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
+import com.pokidin.a.diary.contracts.EntryContract;
 import com.pokidin.a.diary.contracts.LoginContract;
-import com.pokidin.a.diary.presenters.LoginPresenterImpl;
+import com.pokidin.a.diary.presenters.EntryPresenterImpl;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -23,7 +24,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private LoginContract.LoginPresenter mPresenter;
+    private EntryContract.EntryPresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
-        mPresenter = new LoginPresenterImpl(this);
+        mPresenter = new EntryPresenterImpl(this);
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
