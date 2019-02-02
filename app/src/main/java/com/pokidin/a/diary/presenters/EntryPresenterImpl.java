@@ -13,15 +13,15 @@ import com.pokidin.a.diary.storage.Preferences;
 public class EntryPresenterImpl implements EntryContract.EntryPresenter, EntryContract.EntryModel.OnFinishedListener {
     private static final String TAG = EntryPresenterImpl.class.getSimpleName();
 
-    private LoginContract.LoginView mView;
+    private EntryContract.EntryView mView;
     private EntryContract.EntryModel mModel;
     private UserData mUserData;
 
-    public EntryPresenterImpl(LoginContract.LoginView view) {
+    public EntryPresenterImpl(EntryContract.EntryView view) {
         mView = view;
     }
 
-    @Override // NO
+    @Override
     public void entryBtnClicked() {
         mUserData = mView.getUserData();
         if (checkEntryData(mUserData)) {
@@ -46,7 +46,7 @@ public class EntryPresenterImpl implements EntryContract.EntryPresenter, EntryCo
     }
 
     // Validation of the specified data
-    private boolean checkEntryData(UserData userData) {
+    protected boolean checkEntryData(UserData userData) {
         if (userData.getEmail().isEmpty()) {
             mView.showToast("Email field cannot be empty");
             return false;

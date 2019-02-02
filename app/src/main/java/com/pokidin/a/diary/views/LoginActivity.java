@@ -16,7 +16,7 @@ import com.pokidin.a.diary.contracts.EntryContract;
 import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.presenters.EntryPresenterImpl;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
+public class LoginActivity extends AppCompatActivity implements EntryContract.EntryView {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private AutoCompleteTextView mEmailView;
