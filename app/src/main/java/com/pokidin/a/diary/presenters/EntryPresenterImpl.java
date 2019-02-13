@@ -6,7 +6,6 @@ import android.util.Patterns;
 import com.pokidin.a.diary.common.App;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.EntryContract;
-import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.models.EntryModelImpl;
 import com.pokidin.a.diary.storage.Preferences;
 

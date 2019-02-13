@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.EntryContract;
-import com.pokidin.a.diary.contracts.LoginContract;
 import com.pokidin.a.diary.presenters.EntryPresenterImpl;
 
 public class LoginActivity extends AppCompatActivity implements EntryContract.EntryView {

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.contracts.EntryContract;
-import com.pokidin.a.diary.presenters.CheckInPresImpl;
+import com.pokidin.a.diary.presenters.CheckInPresenterImpl;
 
 public class CheckInActivity extends AppCompatActivity implements EntryContract.EntryView {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -42,7 +42,7 @@ public class CheckInActivity extends AppCompatActivity implements EntryContract.
         mPasswordView = findViewById(R.id.password);
         mPasswordConfirmView = findViewById(R.id.password_confirm);
         Button mEmailRegisterButton = findViewById(R.id.email_check_in_button);
-        mPresenter = new CheckInPresImpl(this);
+        mPresenter = new CheckInPresenterImpl(this);
         mEmailRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
