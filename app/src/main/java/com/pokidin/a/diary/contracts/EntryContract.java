@@ -18,6 +18,8 @@ public interface EntryContract {
 
         void showToast(String message);
 
+        void openRecordsList();
+
         void showProgress();
 
         void hideProgress();

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pokidin.a.diary">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".common.App"
@@ -12,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".views.RecordsListActivity"
+            android:label="@string/title_activity_records_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +26,7 @@
         <activity
             android:name=".views.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".views.CheckInActivity"></activity>
+        <activity android:name=".views.CheckInActivity" />
     </application>
 
 </manifest>

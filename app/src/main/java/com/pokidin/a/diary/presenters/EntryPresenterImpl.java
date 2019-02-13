@@ -79,6 +79,7 @@ public class EntryPresenterImpl implements EntryContract.EntryPresenter, EntryCo
             Preferences preferences = new Preferences(App.getAppContext());
             preferences.setToken(string);
             Log.d(TAG, "onFinished: Token is: " + string);
+            mView.openRecordsList();
         } else {
             Log.d(TAG, "onFinished: Token string is empty");
         }

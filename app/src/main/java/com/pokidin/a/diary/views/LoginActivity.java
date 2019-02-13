@@ -1,5 +1,6 @@
 package com.pokidin.a.diary.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +61,12 @@ public class LoginActivity extends AppCompatActivity implements EntryContract.En
     @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void openRecordsList() {
+        Intent intent = new Intent(this, RecordsListActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.pokidin.a.diary.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,9 +66,17 @@ public class CheckInActivity extends AppCompatActivity implements EntryContract.
         return userData;
     }
 
+    // Можно объединить наследованием
     @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    // Можно объединить наследованием
+    @Override
+    public void openRecordsList() {
+        Intent intent = new Intent(this, RecordsListActivity.class);
+        startActivity(intent);
     }
 
     @Override
