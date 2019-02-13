@@ -14,7 +14,7 @@ public interface RecordsListContract {
     }
 
     interface RecordsListView {
-        void showRecordsList();
+        void showRecordsList(List<Record> records);
 
         void onRecordClicked(Record record);
     }
