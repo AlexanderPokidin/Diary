@@ -5,7 +5,7 @@ import android.util.Log;
 import com.pokidin.a.diary.common.UserData;
 import com.pokidin.a.diary.common.UserLogin;
 import com.pokidin.a.diary.common.UserLoginResponse;
-import com.pokidin.a.diary.contracts.LoginContract;
+import com.pokidin.a.diary.contracts.EntryContract;
 import com.pokidin.a.diary.web.DiaryAPI;
 
 import retrofit2.Call;
@@ -14,16 +14,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginModelImpl implements LoginContract.LoginModel {
-    private static final String TAG = LoginModelImpl.class.getSimpleName();
+public class EntryModelImpl implements EntryContract.EntryModel {
+    private static final String TAG = EntryModelImpl.class.getSimpleName();
 
     private UserLoginResponse mLoginResponse;
 
-    public LoginModelImpl() {
-    }
-
     @Override
-    public void sendLoginUserData(UserData userData) {
+    public void getAccess(UserData userData, final OnFinishedListener listener) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(DiaryAPI.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,6 +38,7 @@ public class LoginModelImpl implements LoginContract.LoginModel {
                     Log.d(TAG, "Response is Successful, " + response.code() + ", " + response.message());
                     mLoginResponse = response.body();
                     assert mLoginResponse != null;
+                    listener.onFinished(getTokenString(mLoginResponse));
                     Log.d(TAG, "mLoginResponse: " + mLoginResponse.getUserName() + ", Token: " + mLoginResponse.getToken());
 
                 } else {
@@ -53,5 +51,9 @@ public class LoginModelImpl implements LoginContract.LoginModel {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
+    }
+
+    private String getTokenString(UserLoginResponse loginResponse) {
+        return loginResponse.getToken();
     }
 }

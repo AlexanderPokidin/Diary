@@ -1,5 +1,6 @@
 package com.pokidin.a.diary.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,10 +12,10 @@ import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
-import com.pokidin.a.diary.contracts.CheckInContract;
+import com.pokidin.a.diary.contracts.EntryContract;
 import com.pokidin.a.diary.presenters.CheckInPresenterImpl;
 
-public class CheckInActivity extends AppCompatActivity implements CheckInContract.CheckInView {
+public class CheckInActivity extends AppCompatActivity implements EntryContract.EntryView {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private AutoCompleteTextView mName;
@@ -24,7 +25,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
     private EditText mPasswordConfirmView;
     private View mProgressView;
     private View mLoginFormView;
-    private CheckInContract.CheckInPresenter mPresenter;
+    private EntryContract.EntryPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Register button is pressed");
-                mPresenter.checkInBtnClicked();
+                mPresenter.entryBtnClicked();
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
@@ -65,9 +66,17 @@ public class CheckInActivity extends AppCompatActivity implements CheckInContrac
         return userData;
     }
 
+    // Можно объединить наследованием
     @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    // Можно объединить наследованием
+    @Override
+    public void openRecordsList() {
+        Intent intent = new Intent(this, RecordsListActivity.class);
+        startActivity(intent);
     }
 
     @Override

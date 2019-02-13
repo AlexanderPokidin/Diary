@@ -1,7 +1,5 @@
 package com.pokidin.a.diary.presenters;
 
-import android.view.View;
-
 import com.pokidin.a.diary.contracts.MainContract;
 
 public class MainPresenterImpl implements MainContract.MainPresenter {

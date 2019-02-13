@@ -1,5 +1,6 @@
 package com.pokidin.a.diary.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,22 +9,21 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.pokidin.a.diary.R;
 import com.pokidin.a.diary.common.UserData;
-import com.pokidin.a.diary.contracts.LoginContract;
-import com.pokidin.a.diary.presenters.LoginPresenterImpl;
+import com.pokidin.a.diary.contracts.EntryContract;
+import com.pokidin.a.diary.presenters.EntryPresenterImpl;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
+public class LoginActivity extends AppCompatActivity implements EntryContract.EntryView {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private LoginContract.LoginPresenter mPresenter;
+    private EntryContract.EntryPresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,12 +38,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
-        mPresenter = new LoginPresenterImpl(this);
+        mPresenter = new EntryPresenterImpl(this);
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Sign In button is pressed");
-                mPresenter.signInBtnClicked();
+                mPresenter.entryBtnClicked();
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
@@ -61,6 +61,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void openRecordsList() {
+        Intent intent = new Intent(this, RecordsListActivity.class);
+        startActivity(intent);
     }
 
     @Override

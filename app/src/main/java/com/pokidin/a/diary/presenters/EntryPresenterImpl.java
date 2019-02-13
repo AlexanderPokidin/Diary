@@ -5,42 +5,39 @@ import android.util.Patterns;
 
 import com.pokidin.a.diary.common.App;
 import com.pokidin.a.diary.common.UserData;
-import com.pokidin.a.diary.common.UserLoginResponse;
-import com.pokidin.a.diary.contracts.LoginContract;
-import com.pokidin.a.diary.models.LoginModelImpl;
+import com.pokidin.a.diary.contracts.EntryContract;
+import com.pokidin.a.diary.models.EntryModelImpl;
 import com.pokidin.a.diary.storage.Preferences;
 
-public class LoginPresenterImpl implements LoginContract.LoginPresenter {
-    private static final String TAG = LoginPresenterImpl.class.getSimpleName();
+public class EntryPresenterImpl implements EntryContract.EntryPresenter, EntryContract.EntryModel.OnFinishedListener {
+    private static final String TAG = EntryPresenterImpl.class.getSimpleName();
 
-    private LoginContract.LoginView mView;
-    private LoginContract.LoginModel mModel;
+    private EntryContract.EntryView mView;
+    private EntryContract.EntryModel mModel;
     private UserData mUserData;
 
-    public LoginPresenterImpl(LoginContract.LoginView view) {
+    public EntryPresenterImpl(EntryContract.EntryView view) {
         mView = view;
     }
 
     @Override
-    public void signInBtnClicked() {
+    public void entryBtnClicked() {
         mUserData = mView.getUserData();
-        if (checkLoginData(mUserData)) {
-            loginUser();
+        if (checkEntryData(mUserData)) {
+            entryUser();
         }
     }
 
     @Override
-    public void loginUser() {
-        mModel = new LoginModelImpl();
+    public void entryUser() {
+        mModel = new EntryModelImpl();
         Log.d(TAG, "Login started successfully");
         mView.showToast("Login started successfully");
 
         if (mModel != null) {
-            mModel.sendLoginUserData(mUserData);
-            UserLoginResponse userLoginResponse = new UserLoginResponse();
-            Preferences preferences = new Preferences(App.getAppContext());
-            preferences.setToken(userLoginResponse.getToken());
-            Log.d(TAG, "loginUser: preferences.setToken");
+            mModel.getAccess(mUserData, this);
+
+            Log.d(TAG, "entryUser: started");
 
         } else {
             Log.d(TAG, "Model is NULL");
@@ -48,7 +45,7 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     }
 
     // Validation of the specified data
-    private boolean checkLoginData(UserData userData) {
+    protected boolean checkEntryData(UserData userData) {
         if (userData.getEmail().isEmpty()) {
             mView.showToast("Email field cannot be empty");
             return false;
@@ -74,5 +71,17 @@ public class LoginPresenterImpl implements LoginContract.LoginPresenter {
     public void onDestroy() {
         mView = null;
         mModel = null;
+    }
+
+    @Override
+    public void onFinished(String string) {
+        if (string != null) {
+            Preferences preferences = new Preferences(App.getAppContext());
+            preferences.setToken(string);
+            Log.d(TAG, "onFinished: Token is: " + string);
+            mView.openRecordsList();
+        } else {
+            Log.d(TAG, "onFinished: Token string is empty");
+        }
     }
 }
